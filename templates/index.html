@@ -41,29 +41,48 @@
     </div>
 
     <script>
-        function updateDoctor(doctor) {
-            document.getElementById("doctor-name").textContent = doctor.name;
-            document.getElementById("rating-value").textContent = doctor.rating;
-            document.getElementById("doctor-details").innerHTML =
-                `<strong>${doctor.position}</strong><br>
-                 Стаж: ${doctor.experience} лет<br>
-                 Клиника: ${doctor.clinic}`;
-        }
+    const photoContainer = document.querySelector(".photo-container");
 
-        async function sendAction(action) {
-            const res = await fetch("/action", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ action })
-            });
-            const data = await res.json();
-            if (data.status === "success") {
-                updateDoctor(data.new_doctor);
-            }
-        }
+    function updateDoctor(doctor) {
+        document.getElementById("doctor-name").textContent = doctor.name;
+        document.getElementById("rating-value").textContent = doctor.rating;
+        document.getElementById("doctor-details").innerHTML =
+            `<strong>${doctor.position}</strong><br>
+             Стаж: ${doctor.experience} лет<br>
+             Клиника: ${doctor.clinic}`;
+    }
 
-        document.getElementById("accept-btn").addEventListener("click", () => sendAction("accept"));
-        document.getElementById("reject-btn").addEventListener("click", () => sendAction("reject"));
+    async function sendAction(action) {
+        // Добавляем класс смахивания
+        const direction = action === "accept" ? "swipe-right" : "swipe-left";
+        photoContainer.classList.add(direction);
+
+        // Ждём завершения анимации (0.5 сек)
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        // Запрашиваем нового врача
+        const res = await fetch("/action", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ action })
+        });
+
+        const data = await res.json();
+
+        if (data.status === "success") {
+            // Сбрасываем старую карточку и вставляем новую
+            photoContainer.classList.remove(direction);
+            updateDoctor(data.new_doctor);
+
+            // Добавляем эффект плавного появления
+            photoContainer.classList.add("fade-in");
+            setTimeout(() => photoContainer.classList.remove("fade-in"), 500);
+        }
+    }
+
+    document.getElementById("accept-btn").addEventListener("click", () => sendAction("accept"));
+    document.getElementById("reject-btn").addEventListener("click", () => sendAction("reject"));
     </script>
+
 </body>
 </html>
