@@ -1,0 +1,207 @@
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+  .profile-card {
+    max-width: 430px;
+    width: 100%;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  }
+
+  .card-main {
+    position: relative;
+    margin: 54px 18px 0;
+    border-radius: 30px;
+    overflow: hidden;
+  }
+
+  .profile-image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .card-top-bar {
+    position: absolute;
+    top: 11px;
+    left: 52px;
+    right: 33px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .progress-bar {
+    flex-grow: 1;
+    height: 5px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 3px;
+    position: relative;
+  }
+
+  .progress-bar-filled {
+    height: 100%;
+    width: 14%; /* 35px / 250px */
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 3px;
+  }
+
+  .card-counter {
+    font-weight: 700;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.7);
+    white-space: nowrap;
+  }
+
+  .card-info-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 346px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.3) 19.71%, rgba(0, 0, 0, 0.55) 32.21%, rgba(0, 0, 0, 0.78) 47.6%, #000000 69.71%);
+    color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+  }
+
+  .info-content {
+    margin-left: 20px; /* 1508px - 1488px */
+    margin-bottom: 95px; /* (20+778) - (657+69) */
+  }
+
+  .doctor-name {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 39px;
+    margin: 0 0 2px 0;
+  }
+
+  .rating {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* 1533px - (1508px + 20px) */
+    margin-bottom: 16px; /* 657px - (618px + 23px) */
+  }
+
+  .star-icon {
+    width: 20px;
+    height: 20px;
+    background-color: #c9ab00;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+
+  .rating-value {
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 23px;
+  }
+
+  .doctor-details {
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 23px;
+    margin: 0;
+  }
+
+  .doctor-details strong {
+    font-weight: 700;
+  }
+
+  .card-actions {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* 1695px - (1513px + 162px) */
+    width: 355px;
+    height: 85px;
+    background-color: #f5f5f5;
+    border-radius: 20px;
+    margin: -42.5px auto 24px; /* Negative margin to pull up, bottom margin for spacing */
+  }
+
+  .action-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .dislike-button {
+    width: 162px;
+    height: 74px;
+    background-color: #821919;
+    border-radius: 15px;
+    padding: 6px;
+  }
+
+  .dislike-button-inner {
+    width: 100%;
+    height: 100%;
+    background-color: #c00202;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .like-button {
+    width: 161px;
+    height: 74px;
+    background-color: #1c7219;
+    border-radius: 15px;
+    padding: 6px;
+  }
+
+  .like-button-inner {
+    width: 100%;
+    height: 100%;
+    background-color: #37b42e;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .action-button img {
+    width: 56px;
+    height: 56px;
+  }
+
+  @media (max-width: 480px) {
+    body {
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+    .profile-card {
+      max-width: 100%;
+      filter: none;
+    }
+    .card-main {
+      margin: 0;
+      border-radius: 0;
+    }
+    .card-actions {
+      width: calc(100% - 36px);
+      margin-bottom: 20px;
+    }
+  }

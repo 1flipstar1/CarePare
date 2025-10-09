@@ -10,6 +10,9 @@
   --color-reject-light: #c00202;
   --color-accept-dark: #1c7219;
   --color-accept-light: #37b42e;
+  --color-text-light: #f5f5f5;
+  --color-text-dark: rgba(0, 0, 0, 0.7);
+  --color-star: #c9ab00;
 }
 
 body {
@@ -59,7 +62,7 @@ body {
 /* Градиент поверх фото */
 .gradient-overlay {
     position: absolute;
-    bottom: 0;
+    bottom: 30px;
     left: 0;
     right: 0;
     height: 346px; /* Высота градиента */
@@ -68,27 +71,106 @@ body {
     border-radius: 12px; /* Совпадает с скруглением фото */
 }
 
+
+
+
 /* Текст поверх фото */
 .text-overlay {
     position: absolute;
-    bottom: 140px;
-    left: 20px;
-    right: 20px;
-    color: white;
-    text-align: center;
-    z-index: 2; /* Выше градиента */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 346px;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    color: var(--color-text-light);
 }
 
-.text-overlay h1 {
+.info-content {
+  margin-left: 20px; /* 1508px - 1488px */
+  margin-bottom: 0px; /* (20+778) - (657+69) */
+  margin-top: 80px;
+}
+
+.doctor-name {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 39px;
+  margin: 0 0 2px 0;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* 1533px - (1508px + 20px) */
+  margin-bottom: 16px; /* 657px - (618px + 23px) */
+}
+
+.star-icon {
+  width: 20px;
+  height: 20px;
+  background-color: #ffd900;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.rating-value {
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 23px;
+}
+
+.doctor-details {
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 23px;
+  margin: 0;
+}
+
+.doctor-details strong {
+  font-weight: 700;
+}
+
+.profile-header {
+    display: flex;
+    align-items: flex-end; /* Выравнивание по нижнему краю */
+    gap: 15px; /* Расстояние между именем и рейтингом */
+    margin-bottom: 15px;
+}
+
+
+
+.profile-rating-compact {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 5px; /* Небольшой отступ снизу для выравнивания с именем */
+}
+
+.rating-text {
+    font-size: 16px; /* Чуть меньше шрифт */
+    font-weight: 400;
+    line-height: 1.2;
+    color: white;
+    opacity: 0.9;
+}
+
+.profile-name {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    text-align: left; /* Выравнивание по левому краю */
+    font-size: 32px;
+}
+
+/* .text-overlay h1 {
     font-size: 24px;
     margin-bottom: 8px;
     font-weight: 600;
-}
+} */
 
-.text-overlay p {
-    font-size: 16px;
-    opacity: 0.9;
-}
 
 /* НОВЫЙ БЛОК КНОПОК */
 .action-area {
