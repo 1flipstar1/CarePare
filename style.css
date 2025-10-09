@@ -1,0 +1,138 @@
+/* Сброс стандартных отступов */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+  --color-reject-dark: #821919;
+  --color-reject-light: #c00202;
+  --color-accept-dark: #1c7219;
+  --color-accept-light: #37b42e;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 395px;
+    position: relative;
+}
+
+/* Контейнер для фото */
+.photo-container {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Основное фото */
+.main-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+}
+
+/* Текст поверх фото */
+.text-overlay {
+    position: absolute;
+    bottom: 140px;
+    left: 20px;
+    right: 20px;
+    color: white;
+    text-align: center;
+}
+
+.text-overlay h1 {
+    font-size: 24px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.text-overlay p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+/* НОВЫЙ БЛОК КНОПОК */
+.action-area {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 355px;
+    height: 85px;
+    background-color: #f5f5f5;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index: 3;
+    padding: 0 5px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.action-button {
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 162px;
+    height: 74px;
+    border-radius: 15px;
+    transition: transform 0.2s ease;
+}
+
+.action-button:active {
+    transform: scale(0.95);
+}
+
+.action-button img {
+    width: 56px;
+    height: 56px;
+}
+
+.reject-button {
+    background-color: var(--color-reject-light);
+    border: 6px solid var(--color-reject-dark);
+}
+
+.accept-button {
+    background-color: var(--color-accept-light);
+    border: 6px solid var(--color-accept-dark);
+}
+
+/* Адаптивность для очень маленьких экранов */
+@media (max-width: 400px) {
+    .action-area {
+        width: 95%;
+        height: 75px;
+    }
+    
+    .action-button {
+        width: 140px;
+        height: 65px;
+    }
+    
+    .action-button img {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .text-overlay {
+        bottom: 130px;
+    }
+}
