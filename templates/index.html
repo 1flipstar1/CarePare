@@ -23,12 +23,12 @@
                     </div>
                     <p class="doctor-details" id="doctor-details">
                         <strong>{{ doctor.position }}</strong><br>
+                        Стаж: {{ doctor.experience }} лет<br>
                         Клиника: {{ doctor.clinic }}
                     </p>
                 </div>
             </div>
 
-            <!-- Кнопки -->
             <div class="action-area">
                 <button class="action-button reject-button" id="reject-btn">
                     <img src="{{ url_for('static', filename='images/reject-icon.png') }}" alt="Отклонить">
@@ -41,15 +41,15 @@
     </div>
 
     <script>
-        // Функция обновления карточки врача
         function updateDoctor(doctor) {
             document.getElementById("doctor-name").textContent = doctor.name;
             document.getElementById("rating-value").textContent = doctor.rating;
             document.getElementById("doctor-details").innerHTML =
-                `<strong>${doctor.position}</strong><br>Клиника: ${doctor.clinic}`;
+                `<strong>${doctor.position}</strong><br>
+                 Стаж: ${doctor.experience} лет<br>
+                 Клиника: ${doctor.clinic}`;
         }
 
-        // Отправка действия на сервер
         async function sendAction(action) {
             const res = await fetch("/action", {
                 method: "POST",
@@ -62,7 +62,6 @@
             }
         }
 
-        // Обработчики кнопок
         document.getElementById("accept-btn").addEventListener("click", () => sendAction("accept"));
         document.getElementById("reject-btn").addEventListener("click", () => sendAction("reject"));
     </script>
