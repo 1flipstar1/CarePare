@@ -3,42 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мобильная страница</title>
+    <title>Карточка врача</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
         <div class="photo-container">
             <img src="{{ url_for('static', filename='images/doctor.png') }}" alt="Основное фото" class="main-photo">
-            
-            <!-- Белый прямоугольник -->
-            <div class="white-overlay"></div>
 
-            <!-- Градиент -->
+            <div class="white-overlay"></div>
             <div class="gradient-overlay"></div>
 
-            <!-- Текстовый блок -->
             <div class="text-overlay">
                 <div class="info-content">
-                    <h1 class="doctor-name" id="doctor-name">{{ doctor_name }}</h1>
+                    <h1 class="doctor-name" id="doctor-name">{{ doctor.name }}</h1>
                     <div class="rating">
                         <div class="star-icon"></div>
-                        <span class="rating-value">5,5</span>
+                        <span class="rating-value" id="rating-value">{{ doctor.rating }}</span>
                     </div>
-                    <p class="doctor-details">
-                        <strong>Невролог</strong><br>
-                        Стаж: 5 лет<br>
-                        Клиника доктора Пирогова
+                    <p class="doctor-details" id="doctor-details">
+                        <strong>{{ doctor.position }}</strong><br>
+                        Клиника: {{ doctor.clinic }}
                     </p>
                 </div>
             </div>
 
             <!-- Кнопки -->
             <div class="action-area">
-                <button class="action-button reject-button">
+                <button class="action-button reject-button" id="reject-btn">
                     <img src="{{ url_for('static', filename='images/reject-icon.png') }}" alt="Отклонить">
                 </button>
-                <button class="action-button accept-button">
+                <button class="action-button accept-button" id="accept-btn">
                     <img src="{{ url_for('static', filename='images/accept-icon.png') }}" alt="Принять">
                 </button>
             </div>
@@ -46,23 +41,30 @@
     </div>
 
     <script>
-        // Функция обновления имени на странице
-        function updateDoctorName(newName) {
-            document.getElementById("doctor-name").textContent = newName;
+        // Функция обновления карточки врача
+        function updateDoctor(doctor) {
+            document.getElementById("doctor-name").textContent = doctor.name;
+            document.getElementById("rating-value").textContent = doctor.rating;
+            document.getElementById("doctor-details").innerHTML =
+                `<strong>${doctor.position}</strong><br>Клиника: ${doctor.clinic}`;
         }
 
-        // Опрос сервера раз в секунду
-        setInterval(() => {
-            fetch("/get_current_name")
-                .then(response => response.json())
-                .then(data => {
-                    const currentName = document.getElementById("doctor-name").textContent;
-                    if (data.current_name !== currentName) {
-                        updateDoctorName(data.current_name);
-                    }
-                })
-                .catch(err => console.error("Ошибка при обновлении имени:", err));
-        }, 1000);
+        // Отправка действия на сервер
+        async function sendAction(action) {
+            const res = await fetch("/action", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ action })
+            });
+            const data = await res.json();
+            if (data.status === "success") {
+                updateDoctor(data.new_doctor);
+            }
+        }
+
+        // Обработчики кнопок
+        document.getElementById("accept-btn").addEventListener("click", () => sendAction("accept"));
+        document.getElementById("reject-btn").addEventListener("click", () => sendAction("reject"));
     </script>
 </body>
 </html>
